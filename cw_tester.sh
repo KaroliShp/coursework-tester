@@ -1,12 +1,11 @@
 #!/bin/sh
 
-# Usage: ./cw_tester.sh 0 tokenizer
-# Where tokenizer must be the name of the .c, .s and shell script
-
 # 0 - false, > 1 - true
 OUTPUT_INDIVIDUAL_RESULTS="$1"
 # Name of the task
 TASK_NAME="$2"
+# Mars name
+MARS_NAME="$3"
 
 # Counter for inputs
 COUNTER=0
@@ -30,7 +29,7 @@ do
   echo "$p" > "input.txt"
 
   # Execute both commands
-  COMMAND1="$(java -jar Mars4_5.jar nc me sm ${TASK_NAME}.s 2>/dev/null)"
+  COMMAND1="$(java -jar ${MARS_NAME} nc me sm ${TASK_NAME}.s 2>/dev/null)"
   COMMAND2="$(./${TASK_NAME})"
 
   if [ "${COMMAND1}" = "${COMMAND2}" ]; then
